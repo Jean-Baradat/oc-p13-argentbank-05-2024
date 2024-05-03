@@ -1,0 +1,21 @@
+// Utils
+@import "./utils/variables";
+@import "./utils/mixins";
+@import "./utils/helpers";
+
+// Vendors
+
+// Base
+@import "./base/base";
+
+// Components
+
+// Layout
+@import "./layouts/header";
+@import "./layouts/footer";
+
+// Pages
+@import "./pages/notFound";
+@import "./pages/home";
+
+// Themes

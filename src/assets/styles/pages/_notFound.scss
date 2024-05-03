@@ -1,0 +1,70 @@
+.not-found {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	color: $primary;
+	gap: 8rem;
+
+	.group {
+		text-align: center;
+	}
+
+	@include media-max($sm) {
+		& {
+			gap: 113px;
+			padding: 113px 0;
+		}
+	}
+
+	.title {
+		font-size: 15rem;
+		font-weight: 700;
+
+		@include media-max($md) {
+			& {
+				font-size: 10rem;
+			}
+		}
+
+		@include media-max($sm) {
+			& {
+				font-size: 5rem;
+			}
+		}
+	}
+
+	.mess {
+		font-size: 2rem;
+		text-align: center;
+		margin: 0 3rem;
+
+		@include media-max($md) {
+			& {
+				font-size: 1.5rem;
+			}
+		}
+
+		@include media-max($sm) {
+			& {
+				font-size: 1rem;
+			}
+		}
+	}
+
+	.link {
+		font-size: 1.5rem;
+		transition: text-shadow linear 100ms;
+		text-align: center;
+
+		&:hover {
+			text-decoration: underline;
+		}
+
+		@include media-max($md) {
+			& {
+				font-size: 1rem;
+			}
+		}
+	}
+}
