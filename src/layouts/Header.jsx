@@ -19,7 +19,7 @@ const Header = () => {
 				</Link>
 				<div>
 					<Link
-						to="/"
+						to="/login"
 						className="main-nav-item"
 					>
 						<FaUserCircle />
