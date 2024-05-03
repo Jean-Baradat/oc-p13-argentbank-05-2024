@@ -1,15 +1,60 @@
-import React from "react"
+import React, { useState } from "react"
 
 const Profile = () => {
+	const [updateUserName, setUpdateUserName] = useState(false)
+
 	return (
 		<main className="main bg-dark">
 			<div className="header">
-				<h1>
-					Welcome back
-					<br />
-					Tony Jarvis!
-				</h1>
-				<button className="edit-button">Edit Name</button>
+				{!updateUserName ? (
+					<>
+						<h1>
+							Welcome back
+							<br />
+							Tony Jarvis!
+						</h1>
+						<button
+							className="edit-button"
+							onClick={() => setUpdateUserName(true)}
+						>
+							Edit Name
+						</button>
+					</>
+				) : (
+					<div className="form">
+						<h1>Welcome back</h1>
+						<div className="input-container">
+							<div className="input-wrapper">
+								<input
+									type="text"
+									id="first-name"
+									placeholder="Tony"
+								/>
+							</div>
+							<div className="input-wrapper">
+								<input
+									type="text"
+									id="last-name"
+									placeholder="Jarvis"
+								/>
+							</div>
+						</div>
+						<div className="button-container">
+							<button
+								className="edit-button"
+								onClick={() => setUpdateUserName(false)}
+							>
+								Save
+							</button>
+							<button
+								className="edit-button"
+								onClick={() => setUpdateUserName(false)}
+							>
+								Cancel
+							</button>
+						</div>
+					</div>
+				)}
 			</div>
 			<h2 className="sr-only">Accounts</h2>
 			<section className="account">
