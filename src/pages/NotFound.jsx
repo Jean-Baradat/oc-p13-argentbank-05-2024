@@ -12,13 +12,13 @@ const NotFound = () => {
 		<main className="not-found">
 			<div className="group">
 				<h1 className="title">404</h1>
-				<p className="mess">Oups! La page que vous demandez n'existe pas.</p>
+				<p className="mess">The page you're looking for doesn't exist.</p>
 			</div>
 			<Link
 				to="/"
 				className="link"
 			>
-				Retourner sur la page d’accueil
+				Back to home
 			</Link>
 		</main>
 	)
