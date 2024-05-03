@@ -31,7 +31,7 @@ const Login = () => {
 						<label htmlFor="remember-me">Remember me</label>
 					</div>
 					<Link
-						to="/"
+						to="/profile"
 						className="sign-in-button"
 					>
 						Sign In

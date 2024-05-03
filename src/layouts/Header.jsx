@@ -18,6 +18,7 @@ const Header = () => {
 					<h1 className="sr-only">Argent Bank</h1>
 				</Link>
 				<div>
+					{/* TODO: switch to login display */}
 					<Link
 						to="/login"
 						className="main-nav-item"
