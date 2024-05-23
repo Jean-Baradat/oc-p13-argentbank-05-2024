@@ -4,6 +4,7 @@ import NotFound from "@/pages/NotFound"
 import Layout from "@/layouts/Layout"
 import Login from "@/pages/Login"
 import Profile from "@/pages/Profile"
+import PrivateRoute from "@/routers/PrivateRoute"
 
 /**
  * Router is an array of the application's hard routes
@@ -19,11 +20,19 @@ const Router = createBrowserRouter([
 			},
 			{
 				path: "/login",
-				element: <Login />,
+				element: (
+					<PrivateRoute modeLoginAccess={false}>
+						<Login />
+					</PrivateRoute>
+				),
 			},
 			{
 				path: "/profile",
-				element: <Profile />,
+				element: (
+					<PrivateRoute modeLoginAccess={true}>
+						<Profile />
+					</PrivateRoute>
+				),
 			},
 		],
 	},
