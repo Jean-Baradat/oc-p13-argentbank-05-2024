@@ -45,8 +45,12 @@ export const isAuthTokenValid = () => {
 		return false
 	}
 
-	const { exp: expirationDate } = jwtDecode(token)
-	const isExpired = Date.now() >= expirationDate * 1000
-
-	return !isExpired
+	try {
+		const { exp: expirationDate } = jwtDecode(token)
+		const isExpired = Date.now() >= expirationDate * 1000
+		return !isExpired
+	} catch {
+		removeAuthToken()
+		return false
+	}
 }

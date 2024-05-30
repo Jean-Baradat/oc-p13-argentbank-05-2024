@@ -1,14 +1,19 @@
 import iconChat from "@/assets/images/icon-chat.png"
 import iconMoney from "@/assets/images/icon-money.png"
 import iconSecurity from "@/assets/images/icon-security.png"
-import { useSelector } from "react-redux"
+import { sendQuestion } from "@/store/Actions"
+import { useDispatch, useSelector } from "react-redux"
 
 const Home = () => {
 	const com = useSelector(state => state.Com)
+	const dispatch = useDispatch()
 
 	return (
 		<main>
 			J'ai recu "{com.question}"
+			<button onClick={() => dispatch(sendQuestion(com.question + 1))}>
+				test
+			</button>
 			<div className="hero">
 				<section className="hero-content">
 					<h2 className="sr-only">Promoted Content</h2>

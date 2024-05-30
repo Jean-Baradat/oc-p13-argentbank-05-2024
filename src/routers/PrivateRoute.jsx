@@ -1,4 +1,4 @@
-import { isAuthTokenValid } from "@/services/authToken"
+import { isAuthTokenValid } from "@/services/AuthToken"
 import { Navigate } from "react-router-dom"
 import PropTypes from "prop-types"
 

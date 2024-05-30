@@ -1,19 +1,21 @@
 import { FaUserCircle } from "react-icons/fa"
 import { useForm } from "react-hook-form"
-import axios from "axios"
-import { useState } from "react"
-import { Navigate } from "react-router-dom"
-import { saveAuthToken } from "@/services/authToken"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { saveAuthToken } from "@/services/AuthToken"
+import { sendRequest } from "@/services/ApiClient"
 
 /**
  *
  * @returns
  */
 const Login = () => {
-	const [loginError, setLoginError] = useState(null)
+	const [loginError, setLoginError] = useState(false)
+	const navigate = useNavigate()
 	const {
 		register,
 		handleSubmit,
+		watch,
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
@@ -22,23 +24,29 @@ const Login = () => {
 		},
 	})
 
+	let email = watch("email")
+	let password = watch("password")
+
+	useEffect(() => {
+		setLoginError(false)
+	}, [email, password])
+
 	/**
 	 *
 	 * @param {*} data
 	 */
 	const onSubmit = data => {
-		axios
-			.post(`${import.meta.env.VITE_API_LOGIN_FULL_PATH}`, data)
+		sendRequest("/user/login", "POST", null, data)
 			.then(result => {
-				setLoginError(false)
-				saveAuthToken(result.data.body.token)
+				saveAuthToken(result.body.token)
+				navigate("/profile")
 			})
 			.catch(_ => {
 				setLoginError(true)
 			})
 	}
 
-	return loginError === true || loginError === null ? (
+	return (
 		<main className="main bg-dark">
 			<section className="sign-in-content">
 				<FaUserCircle />
@@ -48,7 +56,7 @@ const Login = () => {
 						<label htmlFor="email">Email</label>
 						<input
 							{...register("email", {
-								required: "The user name is required",
+								required: "The email is required",
 							})}
 							type="text"
 							id="email"
@@ -87,11 +95,6 @@ const Login = () => {
 				</form>
 			</section>
 		</main>
-	) : (
-		<Navigate
-			to="/profile"
-			replace={true}
-		/>
 	)
 }
 
