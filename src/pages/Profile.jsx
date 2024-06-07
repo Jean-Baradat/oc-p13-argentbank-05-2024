@@ -1,52 +1,10 @@
-import { isAuthTokenValid, removeAuthToken } from "@/services/AuthToken"
-import { sendRequest } from "@/services/ApiClient"
-import React, { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { getAuthToken } from "@/services/AuthToken"
+import { useGetUserProfileQuery } from "@/store/ApiSlices"
+import React, { useState } from "react"
 
 const Profile = () => {
 	const [updateUserName, setUpdateUserName] = useState(false)
-	const [user, setUser] = useState([])
-	const navigate = useNavigate()
-
-	/**
-	 * Listen to the localStorage change
-	 */
-	useEffect(() => {
-		const handleStorageChange = event => {
-			if (event.key === "auth_token") {
-				if (!isAuthTokenValid()) {
-					removeAuthToken()
-					navigate("/login")
-				}
-			}
-		}
-
-		window.addEventListener("storage", handleStorageChange)
-
-		return () => {
-			window.removeEventListener("storage", handleStorageChange)
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
-
-	/**
-	 * Fetch user profile from API
-	 */
-	useEffect(() => {
-		sendRequest("/user/profile", "POST", () => navigate("/login"))
-			.then(response => {
-				setUser({
-					firstName: response.body.firstName,
-					lastName: response.body.lastName,
-				})
-			})
-			.catch(_ => {
-				// Here we can handle the error for Profile page
-				// like display a toast message if 403 error and
-				// all other errors don't catch in interceptor
-			})
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+	const { data, isLoading, isSuccess } = useGetUserProfileQuery(getAuthToken())
 
 	return (
 		<main className="main bg-dark">
@@ -56,7 +14,15 @@ const Profile = () => {
 						<h1>
 							Welcome back
 							<br />
-							{user.firstName} {user.lastName}!
+							{isLoading ? (
+								<span>lodding...</span>
+							) : (
+								isSuccess && (
+									<>
+										{data.body.firstName} {data.body.lastName}!
+									</>
+								)
+							)}
 						</h1>
 						<button
 							className="edit-button"
@@ -73,14 +39,14 @@ const Profile = () => {
 								<input
 									type="text"
 									id="first-name"
-									placeholder={user.firstName}
+									placeholder={data?.body.firstName}
 								/>
 							</div>
 							<div className="input-wrapper">
 								<input
 									type="text"
 									id="last-name"
-									placeholder={user.lastName}
+									placeholder={data?.body.lastName}
 								/>
 							</div>
 						</div>

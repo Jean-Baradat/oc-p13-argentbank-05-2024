@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { saveAuthToken } from "@/services/AuthToken"
-import { sendRequest } from "@/services/ApiClient"
+import { useUserLoginMutation } from "@/store/ApiSlices"
 
 /**
  *
@@ -11,6 +11,8 @@ import { sendRequest } from "@/services/ApiClient"
  */
 const Login = () => {
 	const [loginError, setLoginError] = useState(false)
+	const [userLogin] = useUserLoginMutation()
+
 	const navigate = useNavigate()
 	const {
 		register,
@@ -36,7 +38,8 @@ const Login = () => {
 	 * @param {*} data
 	 */
 	const onSubmit = data => {
-		sendRequest("/user/login", "POST", null, data)
+		userLogin(data)
+			.unwrap()
 			.then(result => {
 				saveAuthToken(result.body.token)
 				navigate("/profile")
