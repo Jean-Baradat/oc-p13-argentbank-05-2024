@@ -44,7 +44,7 @@
 }
 
 .header {
-	color: #fff;
+	color: #424242;
 	margin-bottom: 2rem;
 }
 
@@ -65,16 +65,42 @@
 }
 
 .header .form {
-	background-color: rgba(0, 188, 119, 0.3);
+	background-color: rgb(255, 255, 255);
+	box-shadow:
+		rgba(9, 30, 66, 0.08) 0px 4px 8px -2px,
+		rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	max-width: max(min(50%, 50rem), 20rem);
 	margin: 0 auto;
-	padding: 0 2rem 2rem 2rem;
-	border-bottom-left-radius: 1rem;
-	border-bottom-right-radius: 1rem;
+	padding: 0 2rem 0.5rem 2rem;
+	border-radius: 5px;
+	font-weight: bold;
+
+	.is-error,
+	.is-success,
+	.is-unchanged {
+		display: flex;
+		gap: 0.3rem;
+	}
+
+	.is-error {
+		color: red;
+	}
+
+	.is-success {
+		color: rgb(0, 255, 85);
+	}
+
+	.is-unchanged {
+		color: rgb(12, 173, 236);
+	}
+
+	.mt-1 {
+		margin-top: 0.5rem;
+	}
 }
 
 .input-container {
@@ -116,6 +142,7 @@
 	.edit-button {
 		border-color: #00bc77;
 		background-color: #00bc77;
+		cursor: pointer;
 		color: #fff;
 		font-weight: bold;
 		padding: 10px;

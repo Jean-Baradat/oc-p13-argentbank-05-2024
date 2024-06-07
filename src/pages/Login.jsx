@@ -91,6 +91,7 @@ const Login = () => {
 					<input
 						className="sign-in-button"
 						type="submit"
+						value="Sign In"
 					/>
 					<p className="login-error">
 						{loginError ? "Some information is incorrect" : "\u00A0"}

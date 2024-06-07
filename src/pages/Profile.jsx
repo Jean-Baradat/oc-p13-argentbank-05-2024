@@ -1,3 +1,4 @@
+import FormName from "@/components/FormName"
 import { getAuthToken } from "@/services/AuthToken"
 import { useGetUserProfileQuery } from "@/store/ApiSlices"
 import React, { useState } from "react"
@@ -7,7 +8,7 @@ const Profile = () => {
 	const { data, isLoading, isSuccess } = useGetUserProfileQuery(getAuthToken())
 
 	return (
-		<main className="main bg-dark">
+		<main className="main centered-container">
 			<div className="header">
 				{!updateUserName ? (
 					<>
@@ -32,39 +33,13 @@ const Profile = () => {
 						</button>
 					</>
 				) : (
-					<div className="form">
-						<h1>Welcome back</h1>
-						<div className="input-container">
-							<div className="input-wrapper">
-								<input
-									type="text"
-									id="first-name"
-									placeholder={data?.body.firstName}
-								/>
-							</div>
-							<div className="input-wrapper">
-								<input
-									type="text"
-									id="last-name"
-									placeholder={data?.body.lastName}
-								/>
-							</div>
-						</div>
-						<div className="button-container">
-							<button
-								className="edit-button"
-								onClick={() => setUpdateUserName(false)}
-							>
-								Save
-							</button>
-							<button
-								className="edit-button"
-								onClick={() => setUpdateUserName(false)}
-							>
-								Cancel
-							</button>
-						</div>
-					</div>
+					<FormName
+						setUpdateUserName={setUpdateUserName}
+						data={{
+							firstName: data?.body.firstName,
+							lastName: data?.body.lastName,
+						}}
+					/>
 				)}
 			</div>
 			<h2 className="sr-only">Accounts</h2>

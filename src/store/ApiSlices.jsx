@@ -40,7 +40,7 @@ export const userApi = createApi({
 						Authorization: `Bearer ${token}`,
 					},
 				}),
-				// providesTags: ["User"],
+				providesTags: ["UserProfile"],
 			}),
 
 			/**
@@ -52,7 +52,23 @@ export const userApi = createApi({
 					method: "POST",
 					data,
 				}),
-				// invalidatesTags: ["User"],
+			}),
+
+			/**
+			 *
+			 */
+			updateUserProfile: builder.mutation({
+				query: ({ data, token }) => {
+					return {
+						url: "/profile",
+						method: "PUT",
+						data,
+						headers: {
+							Authorization: `Bearer ${token}`,
+						},
+					}
+				},
+				invalidatesTags: ["UserProfile"],
 			}),
 		}
 	},
@@ -60,3 +76,4 @@ export const userApi = createApi({
 
 export const { useGetUserProfileQuery } = userApi
 export const { useUserLoginMutation } = userApi
+export const { useUpdateUserProfileMutation } = userApi
