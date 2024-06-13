@@ -39,7 +39,7 @@ const Header = () => {
 								<div className="square"></div>
 							</div>
 						</div>
-					) : isSuccess ? (
+					) : isSuccess && data ? (
 						<div className="main-nav-items">
 							{!isFetching ? (
 								<>

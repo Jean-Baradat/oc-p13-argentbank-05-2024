@@ -1,16 +1,25 @@
+import { isAuthTokenValid } from "@/services/AuthToken"
 import { createApi } from "@reduxjs/toolkit/query/react"
 import axios from "axios"
+
+let isFirstTime = true
 
 const axiosBaseQuery = ({ baseUrl } = { baseUrl: "" }) => {
 	return async ({ url, method, data, headers }) => {
 		try {
-			const result = await axios({
-				url: baseUrl + url,
-				method,
-				data,
-				headers,
-			})
-			return { data: result.data }
+			if (!isFirstTime || isAuthTokenValid()) {
+				const result = await axios({
+					url: baseUrl + url,
+					method,
+					data,
+					headers,
+				})
+
+				return { data: result.data }
+			} else {
+				isFirstTime = false
+				return { data: null }
+			}
 		} catch (axiosError) {
 			return {
 				error: {
