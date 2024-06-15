@@ -33,10 +33,6 @@ const Login = () => {
 		setLoginError(false)
 	}, [email, password])
 
-	/**
-	 *
-	 * @param {*} data
-	 */
 	const onSubmit = data => {
 		userLogin(data)
 			.unwrap()

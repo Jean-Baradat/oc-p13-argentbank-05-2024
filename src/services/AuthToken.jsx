@@ -3,31 +3,31 @@ import { jwtDecode } from "jwt-decode"
 const TOKEN_KEY = "auth_token"
 
 /**
- *
- * @param {*} token
+ * Save the auth token in the local storage
+ * @param {string} token
  */
 export const saveAuthToken = token => {
 	localStorage.setItem(TOKEN_KEY, token)
 }
 
 /**
- *
- * @returns
+ * Get the auth token form local storage
+ * @returns TOKEN_KEY
  */
 export const getAuthToken = () => {
 	return localStorage.getItem(TOKEN_KEY)
 }
 
 /**
- *
+ * Delete the auth token form local storage
  */
 export const removeAuthToken = () => {
 	localStorage.removeItem(TOKEN_KEY)
 }
 
 /**
- *
- * @returns
+ * With JWT decode get the auth token data
+ * @returns token data
  */
 export const getUserFromAuthToken = () => {
 	const token = getAuthToken()
@@ -35,8 +35,8 @@ export const getUserFromAuthToken = () => {
 }
 
 /**
- *
- * @returns
+ * Test if auth token is valid and exist
+ * @returns {boolean} is expired ?
  */
 export const isAuthTokenValid = () => {
 	const token = getAuthToken()

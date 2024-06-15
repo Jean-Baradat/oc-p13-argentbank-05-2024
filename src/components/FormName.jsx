@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { useForm } from "react-hook-form"
 import { useUpdateUserProfileMutation } from "@/store/ApiSlices"
 import { getAuthToken } from "@/services/AuthToken"
 import { FaInfoCircle } from "react-icons/fa"
 
-/**
- *
- * @param {*} param0
- * @returns
- */
 const NameForm = ({ setUpdateUserName, data }) => {
 	const { handleSubmit, register, reset } = useForm()
 	const [isDisabled, setIsDisabled] = useState({
@@ -25,10 +20,6 @@ const NameForm = ({ setUpdateUserName, data }) => {
 	})
 	const [updateUserProfile] = useUpdateUserProfileMutation()
 
-	/**
-	 *
-	 * @param {*} stateUpdated
-	 */
 	const handleUpdateProfileState = stateUpdated => {
 		let newState = {
 			unchanged: false,
@@ -62,10 +53,6 @@ const NameForm = ({ setUpdateUserName, data }) => {
 		setUpdateProfileState(newState)
 	}
 
-	/**
-	 *
-	 * @param {*} disable
-	 */
 	const handleSetIsDisabled = disable => {
 		setIsDisabled({
 			disable,
@@ -76,10 +63,6 @@ const NameForm = ({ setUpdateUserName, data }) => {
 		})
 	}
 
-	/**
-	 *
-	 * @param {*} data
-	 */
 	const onSubmit = (
 		{ "first-name": firstName, "last-name": lastName },
 		data,

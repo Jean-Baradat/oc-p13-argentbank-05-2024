@@ -2,11 +2,6 @@ import { isAuthTokenValid } from "@/services/AuthToken"
 import { Navigate } from "react-router-dom"
 import PropTypes from "prop-types"
 
-/**
- *
- * @param {*} param0
- * @returns
- */
 const PrivateRoute = ({ children, modeLoginAccess }) => {
 	let isLogin = isAuthTokenValid()
 

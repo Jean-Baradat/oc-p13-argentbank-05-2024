@@ -38,9 +38,6 @@ export const userApi = createApi({
 	}),
 	endpoints: builder => {
 		return {
-			/**
-			 *
-			 */
 			getUserProfile: builder.query({
 				query: token => ({
 					url: "/profile",
@@ -52,9 +49,6 @@ export const userApi = createApi({
 				providesTags: ["UserProfile"],
 			}),
 
-			/**
-			 *
-			 */
 			userLogin: builder.mutation({
 				query: data => ({
 					url: "/login",
@@ -63,9 +57,6 @@ export const userApi = createApi({
 				}),
 			}),
 
-			/**
-			 *
-			 */
 			updateUserProfile: builder.mutation({
 				query: ({ data, token }) => {
 					return {
